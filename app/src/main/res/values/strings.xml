@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GolfTracker</string>
+    <string name="title_rounds">Rounds</string>
+    <string name="title_stats">Stats</string>
+    <string name="title_courses">Courses</string>
+    <string name="title_players">Players</string>
+</resources>
