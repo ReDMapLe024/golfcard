@@ -33,7 +33,7 @@ public class Round {
     public int getScore(){
         int totalScore = 0;
         for(int i = 0; i < numHoles; i++){
-            totalScore++;
+            totalScore+= score[i];
         }
         return totalScore;
     }

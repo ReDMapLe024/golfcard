@@ -1,6 +1,7 @@
 package com.app.science.golftracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,29 +20,47 @@ public class RoundCardAdapter extends RecyclerView.Adapter<RoundCardAdapter.MyVi
 
     private Context context;
     private List<Round> roundList;
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    CustomItemClickListener listener;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView course, date, score, fairways, greens;
 
         public MyViewHolder(View view){
             super(view);
+            view.setOnClickListener(this);
             course = (TextView) view.findViewById(R.id.tv_course);
             date = (TextView) view.findViewById(R.id.tv_date);
             score = (TextView) view.findViewById(R.id.tv_score);
             fairways = (TextView) view.findViewById(R.id.tv_fairways);
             greens = (TextView) view.findViewById(R.id.tv_greens);
         }
+
+        @Override
+        public void onClick(View view) {
+            System.out.println(this.getAdapterPosition());
+            Intent intent = new Intent(context.getApplicationContext(), RoundActivity.class);
+            context.startActivity(intent);
+        }
     }
 
-    public RoundCardAdapter(Context context, List<Round> roundList){
+    public RoundCardAdapter(Context context, List<Round> roundList, CustomItemClickListener listener){
         this.context = context;
         this.roundList = roundList;
+        this.listener = listener;
     }
 
     //Called when new card is created.
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_round, parent, false);
+        final MyViewHolder mholder = new MyViewHolder(itemView);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClick(view, mholder.getLayoutPosition());
+            }
+        });
         return new MyViewHolder(itemView);
     }
 
@@ -51,9 +70,9 @@ public class RoundCardAdapter extends RecyclerView.Adapter<RoundCardAdapter.MyVi
         Round round = roundList.get(position);
         holder.course.setText(round.getCourse());
         holder.date.setText(round.getDate());
-        holder.score.setText(Integer.toString(round.getScore()));
-        holder.fairways.setText(Double.toString(round.getFairwaysHitRate()));
-        holder.greens.setText(Double.toString(round.getGreensHitRate()));
+        holder.score.setText("Score: " + Integer.toString(round.getScore()));
+        holder.fairways.setText("FWY: " + Double.toString(round.getFairwaysHitRate()));
+        holder.greens.setText("GIR: " + Double.toString(round.getGreensHitRate()));
     }
 
     @Override
