@@ -1,7 +1,10 @@
 package com.app.science.golftracker;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,7 @@ public class RoundCardAdapter extends RecyclerView.Adapter<RoundCardAdapter.MyVi
     private Context context;
     private List<Round> roundList;
     CustomItemClickListener listener;
+    private RoundsFragment fragment;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -36,18 +40,24 @@ public class RoundCardAdapter extends RecyclerView.Adapter<RoundCardAdapter.MyVi
             greens = (TextView) view.findViewById(R.id.tv_greens);
         }
 
+        public int getItemPosition(){
+            return getAdapterPosition();
+        }
         @Override
         public void onClick(View view) {
             System.out.println(this.getAdapterPosition());
             Intent intent = new Intent(context.getApplicationContext(), RoundActivity.class);
-            context.startActivity(intent);
+            intent.putExtra("round", roundList.get(getAdapterPosition()));
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, view.findViewById(R.id.tv_course), "coursename");
+            ((Activity) context).startActivity(intent, options.toBundle());
         }
     }
 
-    public RoundCardAdapter(Context context, List<Round> roundList, CustomItemClickListener listener){
+    public RoundCardAdapter(RoundsFragment parentFragment, Context context, List<Round> roundList, CustomItemClickListener listener){
         this.context = context;
         this.roundList = roundList;
         this.listener = listener;
+        this.fragment = parentFragment;
     }
 
     //Called when new card is created.

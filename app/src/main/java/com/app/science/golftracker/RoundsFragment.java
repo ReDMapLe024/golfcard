@@ -20,7 +20,7 @@ import java.util.List;
  * Created by phifilli on 1/26/2018.
  */
 
-public class RoundsFragment extends Fragment{
+public class RoundsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RoundCardAdapter roundCardAdapter;
@@ -44,7 +44,7 @@ public class RoundsFragment extends Fragment{
 
         roundList = new ArrayList<>();
 
-        roundCardAdapter = new RoundCardAdapter(view.getContext(), roundList, new CustomItemClickListener() {
+        roundCardAdapter = new RoundCardAdapter(this, view.getContext(), roundList, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
 
@@ -63,7 +63,7 @@ public class RoundsFragment extends Fragment{
     public void makeTestRounds(){
 
         for(int i = 0; i < 10; i++){
-            roundList.add(new Round("TestCourse","Sep 16 2017",18));
+            roundList.add(new Round("TestCourse"+" "+i,"Sep 16 2017",18));
         }
     }
 }

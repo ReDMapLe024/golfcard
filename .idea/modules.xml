@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GolfTracker.iml" filepath="$PROJECT_DIR$/GolfTracker.iml" />
       <module fileurl="file://C:\Users\phili\AndroidStudioProjects\golfcard\GolfTracker.iml" filepath="C:\Users\phili\AndroidStudioProjects\golfcard\GolfTracker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\phili\AndroidStudioProjects\golfcard\app\app.iml" filepath="C:\Users\phili\AndroidStudioProjects\golfcard\app\app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/golfcard.iml" filepath="$PROJECT_DIR$/golfcard.iml" />
+      <module fileurl="file://C:\Users\phifilli\AndroidStudioProjects\GolfTracker\golfcard.iml" filepath="C:\Users\phifilli\AndroidStudioProjects\GolfTracker\golfcard.iml" />
     </modules>
   </component>
 </project>

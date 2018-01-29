@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="7dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:elevation="3dp">
 
         <LinearLayout
@@ -32,6 +32,7 @@
 
                 <TextView
                     android:id="@+id/tv_course"
+                    android:transitionName="coursename"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
