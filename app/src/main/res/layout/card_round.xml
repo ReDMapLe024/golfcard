@@ -1,136 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
+        android:id="@+id/cardviewer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="7dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="7dp"
-        android:elevation="3dp">
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:transitionName="card"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/relative_layout_card"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                android:paddingLeft="18dp">
+                android:layout_height="match_parent"
+                android:transitionName="layout"
+                android:layout_above="@+id/linear"
+                android:gravity="top">
 
                 <TextView
                     android:id="@+id/tv_course"
-                    android:transitionName="coursename"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:text="TestCourseName"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="24sp" />
+                    android:padding="10dp"
+                    android:text="CourseName"
+                    android:textColor="@android:color/black"
+                    android:textSize="28sp"
+                    android:transitionName="header" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:gravity="end"
-                    android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:padding="10dp"
+                    android:text="Sep 01 2018"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/tv_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="18dp"
-                        android:paddingTop="5dp"
-                        android:text="Sep 16 2017"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/linear"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_below="@+id/relative_layout_card"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="20dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="5dp">
+                <TextView
+                    android:id="@+id/tv_fairways"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/imageView3"
+                    android:text="FRW: 16"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="334dp" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView3"
+                    android:layout_toEndOf="@+id/tv_greens"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="|" />
 
-                        <TextView
-                            android:id="@+id/tv_fairways"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:padding="5dp"
-                            android:text="FWY: 60%"
-                            android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/tv_greens"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView3"
+                    android:layout_toEndOf="@+id/textView9"
+                    android:text="GIR: 12" />
 
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="|"
-                            android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView3"
+                    android:layout_toEndOf="@+id/tv_fairways"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="|" />
 
-                        <TextView
-                            android:id="@+id/tv_greens"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:padding="5dp"
-                            android:text="GIR: 40%"
-                            android:textColor="@android:color/black" />
-
-                        <TextView
-                            android:id="@+id/textView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:text="|"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|center_horizontal"
-                            android:padding="5dp"
-                            android:text="Score: 82"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView3"
+                    android:layout_toEndOf="@+id/textView11"
+                    android:text="Score: 82" />
 
             </LinearLayout>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

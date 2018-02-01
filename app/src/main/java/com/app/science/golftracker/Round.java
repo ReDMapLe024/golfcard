@@ -3,6 +3,9 @@ package com.app.science.golftracker;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by phifilli on 1/26/2018.
  */
@@ -11,14 +14,14 @@ public class Round implements Parcelable {
 
     private String course, date;
     private int numHoles;
+    private List<Hole> holes;
     private int[] score;
     private boolean[] fairwaysHit, greensHit;
 
     public Round(Parcel in){
-
-        score = in.createIntArray();
-        fairwaysHit = in.createBooleanArray();
-        greensHit = in.createBooleanArray();
+        List<Hole> temp =  new ArrayList<Hole>();
+        in.readList(temp, Hole.class.getClassLoader());
+        holes = temp;
         course = in.readString();
         date = in.readString();
         numHoles = in.readInt();
@@ -28,15 +31,11 @@ public class Round implements Parcelable {
         this.course = course;
         this.date = date;
         this.numHoles = numHoles;
-        score = new int[numHoles];
-        fairwaysHit = new boolean[numHoles];
-        greensHit = new boolean[numHoles];
+        holes = new ArrayList<Hole>(numHoles);
     }
 
     public void update(int currentHole, int score, boolean fairwayHit, boolean greenHit){
-       this.score[currentHole] = score;
-       fairwaysHit[currentHole] = fairwayHit;
-       greensHit[currentHole] = greenHit;
+        holes.add(new Hole(score, fairwayHit, greenHit));
     }
 
     public String getCourse(){ return course; }
@@ -45,16 +44,16 @@ public class Round implements Parcelable {
 
     public int getScore(){
         int totalScore = 0;
-        for(int i = 0; i < numHoles; i++){
-            totalScore+= score[i];
+        for(int i = 0; i < holes.size()-1; i++){
+            totalScore+= holes.get(i).getScore();
         }
         return totalScore;
     }
 
     public double getFairwaysHitRate(){
         int hit = 0;
-        for(int i = 0; i < numHoles; i++){
-            if(fairwaysHit[i])
+        for(int i = 0; i < holes.size(); i++){
+            if(holes.get(i).isFairwayHit())
                 hit++;
         }
         return hit/numHoles;
@@ -62,12 +61,14 @@ public class Round implements Parcelable {
 
     public double getGreensHitRate(){
         int hit = 0;
-        for(int i = 0; i < numHoles; i++){
-            if(greensHit[i])
+        for(int i = 0; i < holes.size(); i++){
+            if(holes.get(i).isGreenHit())
                 hit++;
         }
         return hit/numHoles;
     }
+
+    public List<Hole> getHoles(){ return holes; }
 
     @Override
     public int describeContents() {
@@ -76,9 +77,7 @@ public class Round implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeIntArray(score);
-        parcel.writeBooleanArray(fairwaysHit);
-        parcel.writeBooleanArray(greensHit);
+        parcel.writeList(holes);
         parcel.writeString(course);
         parcel.writeString(date);
         parcel.writeInt(numHoles);

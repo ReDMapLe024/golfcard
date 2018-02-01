@@ -1,11 +1,15 @@
 package com.app.science.golftracker;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +52,11 @@ public class RoundCardAdapter extends RecyclerView.Adapter<RoundCardAdapter.MyVi
             System.out.println(this.getAdapterPosition());
             Intent intent = new Intent(context.getApplicationContext(), RoundActivity.class);
             intent.putExtra("round", roundList.get(getAdapterPosition()));
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, view.findViewById(R.id.tv_course), "coursename");
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) context,
+                    Pair.create(view.findViewById(R.id.cardviewer), "card"));
             ((Activity) context).startActivity(intent, options.toBundle());
+
+
         }
     }
 
